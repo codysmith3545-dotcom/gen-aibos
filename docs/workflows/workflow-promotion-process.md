@@ -111,10 +111,12 @@ Required constraints:
 
 - limited volume
 - clear owner
-- logs enabled
+- `workflow_runs` logging
+- `system_status` checks before any external or production action
 - budget cap or monitoring
 - rollback plan
 - approval tier enforced
+- failure alert path
 
 ### 8. Full Production
 
@@ -141,7 +143,12 @@ Workflow is disabled and archived.
 A workflow can move forward only if:
 
 - it has a written spec
-- it logs correctly
+- it logs every execution to `workflow_runs`
+- it logs AI decisions to `agent_runs` when AI makes a decision
+- it creates `approval_requests` for risky proposed actions
+- it updates `external_objects` when syncing external records
+- it writes `audit_events` for important state changes when applicable
+- it checks `system_status` before any external or production action
 - it handles errors
 - it has a documented rollback plan
 - it has a cost-risk estimate
@@ -160,13 +167,14 @@ Recurring workflows may reach Level 5 only after successful shadow/human-reviewe
 
 ## Required Database Touchpoints
 
-Every workflow should use at least one of:
+Every workflow execution must write to `workflow_runs`.
 
-- `workflow_runs`
-- `agent_runs`
-- `approval_requests`
-- `external_objects`
-- `audit_events`
+Additional tables are required when applicable:
+
+- `agent_runs` when AI makes or influences a decision
+- `approval_requests` when a proposed action requires approval
+- `external_objects` when syncing or referencing outside systems
+- `audit_events` for important state changes
 
 ## Review Cadence
 
