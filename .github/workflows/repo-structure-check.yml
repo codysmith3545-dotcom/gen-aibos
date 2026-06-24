@@ -1,0 +1,53 @@
+name: Repo Structure Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  structure-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check required root files
+        run: |
+          test -f README.md
+          test -f AGENTS.md
+          test -f CLAUDE.md
+
+      - name: Check required docs
+        run: |
+          test -f docs/00-start-here/START_HERE.md
+          test -f docs/00-start-here/system-constitution.md
+          test -f docs/00-start-here/implementation-completeness-audit.md
+          test -f docs/00-start-here/future-context-and-tooling.md
+          test -f docs/security/trusted-tools-registry.md
+          test -f docs/13-command-center/command-center-mvp.md
+
+      - name: Check Supabase files
+        run: |
+          test -f supabase/config.toml
+          test -f supabase/migrations/0001_core_foundation.sql
+          test -f supabase/migrations/0002_rls_scaffold.sql
+          test -f supabase/seed/dev_seed.sql
+          test -f supabase/schema-docs/core-schema-reference.md
+          test -f supabase/policies/rls-policy-plan.md
+
+      - name: Check workflow specs
+        run: |
+          test -f docs/07-workflows/examples/daily-business-summary.md
+          test -f docs/07-workflows/examples/gmail-lead-intake-shadow.md
+          test -f docs/07-workflows/examples/drive-file-classifier-shadow.md
+          test -f docs/07-workflows/examples/approval-request-notifier.md
+          test -f docs/07-workflows/examples/failed-workflow-alert.md
+
+      - name: Check setup scripts
+        run: |
+          test -f scripts/setup/validate_migrations.sh
+          test -f scripts/setup/supabase_local_validation_checklist.md
+          test -f scripts/evals/eval-cases.json
+          test -f scripts/evals/run_eval_cases.md
