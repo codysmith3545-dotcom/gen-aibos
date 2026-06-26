@@ -96,35 +96,48 @@ As of this handoff, the repo contains:
 - trusted tools registry
 - future tooling/context inventory
 - core Supabase starter schema
-- RLS scaffold
+- conservative RLS scaffold
 - dev seed data
+- Supabase local config
+- local migration validation helper
+- local validation checklist
+- lightweight repository structure GitHub Actions check
 - workflow specs
 - n8n export/backups standard
 - Command Center MVP spec
 - eval cases
 - implementation completeness audit
-- local Supabase validation PR work in progress
+- Codex handoff guide
 
-## Current Open Work
+## Current Next Work
 
-The immediate next work is PR #17:
+PR #17 has been merged. The repository now has local Supabase validation support.
 
-`Add Supabase local validation and repo structure checks`
+The next work is:
 
-This PR adds:
+`Add basic Command Center app scaffold`
 
-- `supabase/config.toml`
-- `scripts/setup/validate_migrations.sh`
+Before building the dashboard scaffold, inspect:
+
+- `apps/dashboard/README.md`
+- `docs/13-command-center/command-center-mvp.md`
+- `supabase/schema-docs/core-schema-reference.md`
 - `scripts/setup/supabase_local_validation_checklist.md`
-- `.github/workflows/repo-structure-check.yml`
 
-Review this PR before starting later work.
+If your environment supports Docker and Supabase CLI, first run local migration validation using:
+
+```bash
+chmod +x scripts/setup/validate_migrations.sh
+./scripts/setup/validate_migrations.sh
+```
+
+If local validation cannot be run in your environment, document why in the PR and keep the dashboard scaffold free of live credentials.
 
 ## What Is Intentionally Not Done Yet
 
 Do not claim these are done until they are actually implemented:
 
-- actual Command Center app
+- actual Command Center app beyond any future scaffold
 - actual n8n workflow JSON exports
 - actual production RLS policies
 - actual eval runner code
@@ -146,16 +159,15 @@ The repo says this explicitly in `implementation-completeness-audit.md`.
 
 Follow this sequence unless a human changes it:
 
-1. Finish Supabase local config and migration validation.
-2. Validate migrations locally.
-3. Add minimal Command Center app scaffold.
-4. Add internal-only n8n workflow JSON exports.
-5. Add eval runner script.
-6. Add land intelligence v0 schema proposal.
-7. Add backup/export scripts.
-8. Add cost tracking schema/script placeholders.
-9. Add stronger CI checks.
-10. Only then begin live integrations.
+1. Validate migrations locally.
+2. Add minimal Command Center app scaffold.
+3. Add internal-only n8n workflow JSON exports.
+4. Add eval runner script.
+5. Add land intelligence v0 schema proposal.
+6. Add backup/export scripts.
+7. Add cost tracking schema/script placeholders.
+8. Add stronger CI checks.
+9. Only then begin live integrations.
 
 ## Near-Term Acceptance Criteria
 
@@ -286,6 +298,6 @@ Avoid work that:
 
 The project is ready for Codex to continue from repository context.
 
-The repo contains the conversation-derived doctrine, decisions, tool context, roadmap, safety rules, schema foundation, workflow specs, and completeness audit.
+The repo contains the conversation-derived doctrine, decisions, tool context, roadmap, safety rules, schema foundation, workflow specs, local validation support, and completeness audit.
 
-The next correct action is to review and merge PR #17 after checking the local Supabase validation files, then proceed to a minimal Command Center scaffold.
+The next correct action is to validate migrations locally if possible and create a minimal Command Center scaffold without live integrations or secrets.

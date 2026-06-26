@@ -36,6 +36,8 @@ This file prevents false confidence. It should be updated after every major PR.
 | Expert review perspectives | Implemented | system-constitution-expanded.md |
 | Full context index | Implemented | docs/00-start-here/full-context-index.md |
 | Conversation depth audit | Implemented | docs/00-start-here/conversation-depth-audit.md |
+| Codex handoff guide | Implemented | docs/00-start-here/CODEX_HANDOFF.md |
+| Future context/tooling inventory | Implemented | docs/00-start-here/future-context-and-tooling.md |
 
 # 2. Agent Instructions and Guardrails
 
@@ -73,9 +75,10 @@ This file prevents false confidence. It should be updated after every major PR.
 | RLS/access-control policy plan | Implemented | supabase/policies/rls-policy-plan.md |
 | Conservative RLS scaffold migration | Scaffolded | supabase/migrations/0002_rls_scaffold.sql |
 | Development seed data | Scaffolded | supabase/seed/dev_seed.sql |
+| Supabase local config | Scaffolded | supabase/config.toml |
+| Migration validation helper | Scaffolded | scripts/setup/validate_migrations.sh |
+| Supabase local validation checklist | Implemented | scripts/setup/supabase_local_validation_checklist.md |
 | Actual production RLS policies | Pending | future PR |
-| Supabase local config | Pending | future PR |
-| Migration test script | Pending | future PR |
 | Expanded Level 2/3 tables | Documented | core-schema.md, not fully migrated |
 
 # 5. Workflow Governance
@@ -191,6 +194,7 @@ This file prevents false confidence. It should be updated after every major PR.
 | Buy-now stack | Documented | cost-model.md, setup checklist |
 | Tool roles | Implemented | docs/02-architecture/tool-roles.md |
 | Trusted tools registry | Implemented | docs/security/trusted-tools-registry.md |
+| Future tooling inventory | Implemented | docs/00-start-here/future-context-and-tooling.md |
 | Full software pricing spreadsheet | Pending | optional future artifact |
 
 # 14. Setup and Implementation
@@ -199,11 +203,13 @@ This file prevents false confidence. It should be updated after every major PR.
 |---|---|---|
 | First-week build plan | Implemented | docs/16-implementation/first-week-build-plan.md |
 | Detailed setup checklist | Implemented | docs/16-implementation/setup-checklist-detailed.md |
-| Supabase setup details | Documented partially | setup checklist, RLS plan |
+| Supabase setup details | Implemented for local/starter | setup checklist, RLS plan, supabase/config.toml, validation checklist |
 | n8n setup details | Documented partially | setup checklist, export standard |
 | Context7/Playwright setup details | Documented partially | setup checklist |
-| Actual setup scripts | Pending | scripts/setup placeholder |
-| CLI commands | Pending | future PR after tool choices are finalized |
+| Local migration validation script | Scaffolded | scripts/setup/validate_migrations.sh |
+| Repository structure GitHub Actions check | Implemented | .github/workflows/repo-structure-check.yml |
+| Full CI pipeline | Pending | future PR after app/scripts exist |
+| CLI commands | Documented partially | validation checklist and setup docs |
 
 # 15. What Is Not 100% Implemented Yet
 
@@ -211,17 +217,17 @@ The following are not complete implementation yet and should not be represented 
 
 1. Actual Command Center app.
 2. Actual n8n workflow JSON exports.
-3. Actual Supabase local config and migration tests.
-4. Actual production-safe RLS policies.
-5. Actual eval runner code.
-6. Actual backup scripts.
-7. Actual cost tracking scripts.
-8. Actual land-specific database migrations.
-9. Actual land data source profiles.
-10. Actual integrations with Google Workspace, Attio, Stripe, QuickBooks/Xero, Vercel, Cloudflare, PostHog, Sentry, Browserbase, or Apify.
-11. Actual memory implementation with pgvector.
-12. Actual GitHub Actions CI.
-13. Actual Linear/Codex task automation.
+3. Production-safe RLS policies.
+4. Eval runner code.
+5. Backup scripts.
+6. Cost tracking scripts.
+7. Land-specific database migrations.
+8. Land data source profiles.
+9. Actual integrations with Google Workspace, Attio, Stripe, QuickBooks/Xero, Vercel, Cloudflare, PostHog, Sentry, Browserbase, or Apify.
+10. Actual memory implementation with pgvector.
+11. Full GitHub Actions CI beyond structure checks.
+12. Linear/Codex task automation.
+13. Confirmed local Supabase migration run in a real developer environment.
 
 These are intentionally pending because the doctrine says to build safely in stages.
 
@@ -243,18 +249,17 @@ The repo now has enough detail for Claude Code/Codex to start implementation wor
 
 Status: early scaffold.
 
-The repo includes starter migrations, dev seed data, and eval cases, but it does not yet include live integrations, dashboard code, n8n exports, production RLS, or land module migrations.
+The repo includes starter migrations, dev seed data, local Supabase config, a validation helper, repository structure checks, and eval cases, but it does not yet include live integrations, dashboard code, n8n exports, production RLS, or land module migrations.
 
 # 17. Recommended Next PRs
 
-1. `Add Supabase local config and migration validation scripts`
-2. `Add basic Command Center app scaffold`
-3. `Add n8n JSON exports for internal-only workflows`
-4. `Add eval runner script`
-5. `Add land intelligence v0 schema proposal`
-6. `Add backup/export scripts`
-7. `Add cost tracking schema and script placeholders`
-8. `Add GitHub Actions validation workflow`
+1. `Add basic Command Center app scaffold`
+2. `Add n8n JSON exports for internal-only workflows`
+3. `Add eval runner script`
+4. `Add land intelligence v0 schema proposal`
+5. `Add backup/export scripts`
+6. `Add cost tracking schema and script placeholders`
+7. `Add stronger GitHub Actions validation workflow`
 
 # Final Audit Conclusion
 
